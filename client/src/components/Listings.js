@@ -240,66 +240,69 @@ function Listings() {
             </div>
           </Modal>
         </div>
-        <Modal
-          size="md"
-          show={showCommentModal}
-          className="modal"
-          tabIndex="-1"
-          role="dialog"
-        >
-          <div className="modal-dialog modal-xl w-100" role="document">
-            <div className="modal-content">
-              <div className="modal-header frame">
-                <h5 className="modal-title" id="modalTitle">
-                  Comments
-                </h5>
+        <div onClick={closeCommentModal}>
+          <Modal
+            size="md"
+            show={showCommentModal}
+            className="modal"
+            tabIndex="-1"
+            role="dialog"
+            onClick={e => e.stopPropagation()}
+          >
+            <div className="modal-dialog modal-xl w-100" role="document">
+              <div className="modal-content">
+                <div className="modal-header frame">
+                  <h5 className="modal-title" id="modalTitle">
+                    Comments
+                  </h5>
+                  <button
+                    type="button"
+                    className="close proBtn"
+                    aria-label="Close"
+                    onClick={() => closeCommentModal()}
+                  >
+                    <span aria-hidden="true">&times;</span>
+                  </button>
+                </div>
+                <div className="modal-body">
+                  {comments.map((item, key) => (
+                    <div className="flexAway" key={item.author + item.comment}>
+                      <div className="frame marg pad">
+                        <b className="">{item.author}</b>: {item.comment}
+                      </div>
+                      &nbsp;
+                      {username === item.author ? (
+                        <button
+                          className="casButton"
+                          onClick={() => handleRemoveComment(key)}
+                        >
+                          Delete
+                        </button>
+                      ) : (
+                        ""
+                      )}
+                    </div>
+                  ))}
+                </div>
+                <textarea
+                  className="darkFrame"
+                  onChange={handleCommentText}
+                  placeholder="Write your comment..."
+                  value={commentText}
+                ></textarea>
+
                 <button
                   type="button"
-                  className="close proBtn"
+                  className="close mt-3 proBtn"
                   aria-label="Close"
-                  onClick={() => closeCommentModal()}
+                  onClick={() => handleAddComment()}
                 >
-                  <span aria-hidden="true">&times;</span>
+                  <span aria-hidden="true">Post comment</span>
                 </button>
               </div>
-              <div className="modal-body">
-                {comments.map((item, key) => (
-                  <div className="flexAway" key={item.author + item.comment}>
-                    <div className="frame marg pad">
-                      <b className="">{item.author}</b>: {item.comment}
-                    </div>
-                    &nbsp;
-                    {username === item.author ? (
-                      <button
-                        className="casButton"
-                        onClick={() => handleRemoveComment(key)}
-                      >
-                        Delete
-                      </button>
-                    ) : (
-                      ""
-                    )}
-                  </div>
-                ))}
-              </div>
-              <textarea
-                className="darkFrame"
-                onChange={handleCommentText}
-                placeholder="Write your comment..."
-                value={commentText}
-              ></textarea>
-
-              <button
-                type="button"
-                className="close mt-3 proBtn"
-                aria-label="Close"
-                onClick={() => handleAddComment()}
-              >
-                <span aria-hidden="true">Post comment</span>
-              </button>
             </div>
-          </div>
-        </Modal>
+          </Modal>
+        </div>
       </section>
     );
   }
