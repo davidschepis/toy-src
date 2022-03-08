@@ -90,6 +90,10 @@ function Listings() {
     window.location.reload();
   };
 
+  const closeToyModalNoReload = () => {
+    setModal(false);
+  }
+
   const showToyModal = (
     name,
     imageURL,
@@ -154,8 +158,8 @@ function Listings() {
               AUTH.loggedIn()
                 ?
                 <button className="znavBtn center" onClick={() => handleZipCode()}>
-              Filter Local Only
-            </button>
+                  Filter Local Only
+                </button>
                 :
                 <div></div>
             }
@@ -186,54 +190,56 @@ function Listings() {
             </div>
           ))}
         </div>
-
-        <Modal
-          size="lg"
-          show={showModal}
-          className="modal"
-          tabIndex="-1"
-          role="dialog"
-          id="toyModal"
-        >
-          <div className="modal-dialog modal-xl w-100" role="document">
-            <div className="modal-content">
-              <div className="modal-header frame">
-                <h5 className="modal-title" id="modalTitle">
-                  {name}
-                </h5>
-                <button
-                  type="button"
-                  className="close proBtn"
-                  aria-label="Close"
-                  onClick={() => closeToyModal()}
-                >
-                  <span aria-hidden="true">&times;</span>
-                </button>
-              </div>
-              <div className="modal-body text-center">
-                <img src={imageURL} alt="toy Example" style={modalImageStyle} />
-                <ul style={listStyle}>
-                  <li key="id1">Price: ${price}</li>
-                  <li key="id2">Owner: {owner}</li>
-                  <li key="id3">Description: {description}</li>
-                  <li key="id4">
-                    {AUTH.loggedIn() ? (
-                      <button
-                        className="proBtn pad"
-                        onClick={() => setCommentModal(true)}
-                      >
-                        Comments
-                      </button>
-                    ) : (
-                      <h1>You must be logged in to view comments</h1>
-                    )}
-                  </li>
-                </ul>
-                <div></div>
+        <div onClick={closeToyModalNoReload}>
+          <Modal
+            size="lg"
+            show={showModal}
+            className="modal"
+            tabIndex="-1"
+            role="dialog"
+            id="toyModal"
+            onClick={e => e.stopPropagation()}
+          >
+            <div className="modal-dialog modal-xl w-100" role="document">
+              <div className="modal-content">
+                <div className="modal-header frame">
+                  <h5 className="modal-title" id="modalTitle">
+                    {name}
+                  </h5>
+                  <button
+                    type="button"
+                    className="close proBtn"
+                    aria-label="Close"
+                    onClick={() => closeToyModalNoReload()}
+                  >
+                    <span aria-hidden="true">&times;</span>
+                  </button>
+                </div>
+                <div className="modal-body text-center">
+                  <img src={imageURL} alt="toy Example" style={modalImageStyle} />
+                  <ul style={listStyle}>
+                    <li key="id1">Price: ${price}</li>
+                    <li key="id2">Owner: {owner}</li>
+                    <li key="id3">Description: {description}</li>
+                    <li key="id4">
+                      {AUTH.loggedIn() ? (
+                        <button
+                          className="proBtn pad"
+                          onClick={() => setCommentModal(true)}
+                        >
+                          Comments
+                        </button>
+                      ) : (
+                        <h1>You must be logged in to view comments</h1>
+                      )}
+                    </li>
+                  </ul>
+                  <div></div>
+                </div>
               </div>
             </div>
-          </div>
-        </Modal>
+          </Modal>
+        </div>
         <Modal
           size="md"
           show={showCommentModal}
