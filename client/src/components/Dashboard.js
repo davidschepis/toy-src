@@ -118,7 +118,7 @@ function Dashboard() {
   };
 
   return (
-    <section className="main">
+    <section className="main" id="dashboardTop">
       <div className="sideWays">
         <div className="nameCard" style={cardStyle}>
           <h1 className="">Welcome, {user.data?.me.username}</h1>

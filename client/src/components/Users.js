@@ -189,45 +189,48 @@ function Users() {
           </div>
         </div>
       ))}
-      <Modal
-        size="lg"
-        show={showUserModal}
-        className="modal"
-        tabIndex="-1"
-        role="dialog"
-      >
-        <div className="modal-dialog modal-xl w-100" role="document">
-          <div className="modal-content">
-            <div className="modal-header">
-              <button
-                type="button"
-                className="btn btn-primary"
-                aria-label="Close"
-                onClick={() => closeUserModal()}
-              >
-                <span aria-hidden="true">&times;</span>
-              </button>
-            </div>
-            <div className="modal-body">
-              <ul style={listStyle}>
-                <li key="id1">Username: {username}</li>
-                <li key="id2">Email: {email}</li>
-                <li key="id3">Location: {location}</li>
-                <li key="id4">Reputation: {reputation}</li>
-                <li key="id5">Has Reviews: {hasReview ? "Yes" : "No"}</li>
-              </ul>
-              <div>
-                <hr></hr>
+      <div onClick={closeUserModal}>
+        <Modal
+          size="lg"
+          show={showUserModal}
+          className="modal"
+          tabIndex="-1"
+          role="dialog"
+          onClick={e => e.stopPropagation()}
+        >
+          <div className="modal-dialog modal-xl w-100" role="document">
+            <div className="modal-content">
+              <div className="modal-header">
+                <button
+                  type="button"
+                  className="btn btn-primary"
+                  aria-label="Close"
+                  onClick={() => closeUserModal()}
+                >
+                  <span aria-hidden="true">&times;</span>
+                </button>
               </div>
-              <div>{determineDecrease(username, reputation)}</div>
-              <div>
-                <hr></hr>
+              <div className="modal-body">
+                <ul style={listStyle}>
+                  <li key="id1">Username: {username}</li>
+                  <li key="id2">Email: {email}</li>
+                  <li key="id3">Location: {location}</li>
+                  <li key="id4">Reputation: {reputation}</li>
+                  <li key="id5">Has Reviews: {hasReview ? "Yes" : "No"}</li>
+                </ul>
+                <div>
+                  <hr></hr>
+                </div>
+                <div>{determineDecrease(username, reputation)}</div>
+                <div>
+                  <hr></hr>
+                </div>
+                <div>{determineIncrease(username, reputation)}</div>
               </div>
-              <div>{determineIncrease(username, reputation)}</div>
             </div>
           </div>
-        </div>
-      </Modal>
+        </Modal>
+      </div>
     </section>
   );
 }

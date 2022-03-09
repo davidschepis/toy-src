@@ -86,13 +86,7 @@ function Listings() {
 
   const closeToyModal = () => {
     setModal(false);
-    window.location.assign("/#findtoys");
-    window.location.reload();
   };
-
-  const closeToyModalNoReload = () => {
-    setModal(false);
-  }
 
   const showToyModal = (
     name,
@@ -139,6 +133,7 @@ function Listings() {
   };
   const handleZipCode = () => {
     getZipCodes(user.location);
+    document.getElementById("localDiv").innerHTML = `<h3>Filtered for listings within 30 miles of ${user.location}</h3>`;
   };
 
   if (data.loading) {
@@ -157,9 +152,11 @@ function Listings() {
             {
               AUTH.loggedIn()
                 ?
-                <button className="znavBtn center" onClick={() => handleZipCode()}>
-                  Filter Local Only
-                </button>
+                <div id="localDiv">
+                  <button className="znavBtn center" onClick={() => handleZipCode()}>
+                    Filter Local Only
+                  </button>
+                </div>
                 :
                 <div></div>
             }
@@ -190,7 +187,7 @@ function Listings() {
             </div>
           ))}
         </div>
-        <div onClick={closeToyModalNoReload}>
+        <div onClick={closeToyModal}>
           <Modal
             size="lg"
             show={showModal}
@@ -210,7 +207,7 @@ function Listings() {
                     type="button"
                     className="close proBtn"
                     aria-label="Close"
-                    onClick={() => closeToyModalNoReload()}
+                    onClick={() => closeToyModal()}
                   >
                     <span aria-hidden="true">&times;</span>
                   </button>
