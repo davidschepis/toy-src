@@ -16,8 +16,6 @@ const format = "json";
 
 const modalImageStyle = {
   maxHeight: "600px",
-  width: "100%",
-  marginBottom: "24px",
 };
 
 const listStyle = {
@@ -213,7 +211,7 @@ function Listings() {
                   </button>
                 </div>
                 <div className="modal-body text-center">
-                  <img src={imageURL} alt="toy Example" style={modalImageStyle} />
+                  <img src={imageURL} alt="toy Example" style={modalImageStyle} className="img-fluid"/>
                   <ul style={listStyle}>
                     <li key="id1">Price: ${price}</li>
                     <li key="id2">Owner: {owner}</li>
